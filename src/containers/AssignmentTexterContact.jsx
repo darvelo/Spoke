@@ -608,6 +608,8 @@ export class AssignmentTexterContact extends React.Component {
   messageSchema = yup.object({
     messageText: yup
       .string()
+      .trim()
+      .min(1)
       .required("Can't send empty message")
       .max(window.MAX_MESSAGE_LENGTH)
   });
