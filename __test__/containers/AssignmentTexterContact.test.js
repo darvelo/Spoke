@@ -155,6 +155,22 @@ describe("when contact is within texting hours...", () => {
       propsWithEnforcedTextingHoursCampaign.refreshData.mock.calls
     ).toHaveLength(0);
   });
+
+  it("prevents sending a whitespace-only text", () => {
+    const form = component.find('form[data-test="messageTextForm"]');
+    expect(form.length).toEqual(1);
+
+    console.log(form.debug());
+
+    const button = component.find('button[data-test="send"]');
+    expect(button.length).toEqual(1);
+
+    button.simulate("click");
+
+    console.log(component.html());
+
+    expect(form.text()).toContain("Can't send empty message");
+  });
 });
 
 describe("AssignmentTextContact has the proper enabled/disabled state when created", () => {

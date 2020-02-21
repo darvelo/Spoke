@@ -608,9 +608,9 @@ export class AssignmentTexterContact extends React.Component {
   messageSchema = yup.object({
     messageText: yup
       .string()
+      .required("Can't send empty message")
       .trim()
       .min(1)
-      .required("Can't send empty message")
       .max(window.MAX_MESSAGE_LENGTH)
   });
 
@@ -897,6 +897,7 @@ export class AssignmentTexterContact extends React.Component {
     ) : (
       <div className={css(styles.messageField)}>
         <GSForm
+          {...dataTest("messageTextForm")}
           ref="form"
           schema={this.messageSchema}
           value={{ messageText: this.state.messageText }}
